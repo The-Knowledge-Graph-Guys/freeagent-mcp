@@ -8,6 +8,10 @@
   "bin": {
     "freeagent-mcp-server": "dist/index.js"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsx watch src/index.ts",
