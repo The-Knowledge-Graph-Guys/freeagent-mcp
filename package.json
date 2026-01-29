@@ -1,5 +1,5 @@
 {
-  "name": "freeagent-mcp-server",
+  "name": "@stupidcodefactory/freeagent-mcp-server",
   "version": "1.0.0",
   "description": "MCP Server for FreeAgent accounting API integration",
   "type": "module",

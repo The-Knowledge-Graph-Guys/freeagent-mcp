@@ -13,7 +13,7 @@ MCP (Model Context Protocol) server for the FreeAgent accounting API. Enables LL
 ### From npm (recommended)
 
 ```bash
-npm install -g freeagent-mcp-server
+npm install -g @stupidcodefactory/freeagent-mcp-server
 ```
 
 ### From source
@@ -63,7 +63,7 @@ Add to your Claude Desktop configuration file:
   "mcpServers": {
     "freeagent": {
       "command": "npx",
-      "args": ["freeagent-mcp-server"],
+      "args": ["@stupidcodefactory/freeagent-mcp-server"],
       "env": {
         "FREEAGENT_CLIENT_ID": "your_client_id",
         "FREEAGENT_CLIENT_SECRET": "your_client_secret",
