@@ -489,6 +489,37 @@ export function createFreeAgentMcpServer(): FreeAgentMcpServer {
         description: 'List unexplained bank transactions',
         inputSchema: zodToJsonSchema(tools.getUnexplainedTransactionsSchema),
       },
+      // Bank transaction explanation tools
+      {
+        name: 'list_bank_transaction_explanations',
+        description: 'List all explanations for a bank account',
+        inputSchema: zodToJsonSchema(tools.listBankTransactionExplanationsSchema),
+      },
+      {
+        name: 'get_bank_transaction_explanation',
+        description: 'Get details of a specific bank transaction explanation including attachment info',
+        inputSchema: zodToJsonSchema(tools.getBankTransactionExplanationSchema),
+      },
+      {
+        name: 'create_bank_transaction_explanation',
+        description: 'Create a new bank transaction explanation with full type support (payment, invoice receipt, bill payment, transfer, etc.)',
+        inputSchema: zodToJsonSchema(tools.createBankTransactionExplanationSchema),
+      },
+      {
+        name: 'update_bank_transaction_explanation',
+        description: 'Update an existing bank transaction explanation',
+        inputSchema: zodToJsonSchema(tools.updateBankTransactionExplanationSchema),
+      },
+      {
+        name: 'delete_bank_transaction_explanation',
+        description: 'Delete a bank transaction explanation',
+        inputSchema: zodToJsonSchema(tools.deleteBankTransactionExplanationSchema),
+      },
+      {
+        name: 'upload_receipt',
+        description: 'Upload a receipt/attachment to a bank transaction explanation (PNG, JPEG, GIF, PDF, max 5MB)',
+        inputSchema: zodToJsonSchema(tools.uploadReceiptSchema),
+      },
     ],
   }));
 
@@ -637,6 +668,44 @@ export function createFreeAgentMcpServer(): FreeAgentMcpServer {
           result = await tools.getUnexplainedTransactions(
             client,
             args as tools.GetUnexplainedTransactionsInput
+          );
+          break;
+
+        // Bank transaction explanation tools
+        case 'list_bank_transaction_explanations':
+          result = await tools.listBankTransactionExplanations(
+            client,
+            args as tools.ListBankTransactionExplanationsInput
+          );
+          break;
+        case 'get_bank_transaction_explanation':
+          result = await tools.getBankTransactionExplanation(
+            client,
+            args as tools.GetBankTransactionExplanationInput
+          );
+          break;
+        case 'create_bank_transaction_explanation':
+          result = await tools.createBankTransactionExplanation(
+            client,
+            args as tools.CreateBankTransactionExplanationInput
+          );
+          break;
+        case 'update_bank_transaction_explanation':
+          result = await tools.updateBankTransactionExplanation(
+            client,
+            args as tools.UpdateBankTransactionExplanationInput
+          );
+          break;
+        case 'delete_bank_transaction_explanation':
+          result = await tools.deleteBankTransactionExplanation(
+            client,
+            args as tools.DeleteBankTransactionExplanationInput
+          );
+          break;
+        case 'upload_receipt':
+          result = await tools.uploadReceipt(
+            client,
+            args as tools.UploadReceiptInput
           );
           break;
 

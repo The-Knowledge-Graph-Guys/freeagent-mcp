@@ -133,22 +133,50 @@ export interface FreeAgentBankAccount {
   bic?: string;
 }
 
+export interface FreeAgentAttachment {
+  url?: string;
+  content_src?: string;
+  content_type?: string;
+  file_name?: string;
+  file_size?: number;
+  description?: string;
+}
+
 export interface FreeAgentBankTransactionExplanation {
   url: string;
+  type?: string;
   category?: string;
   dated_on: string;
   gross_value: string;
   sales_tax_rate?: string;
+  sales_tax_value?: string;
   description?: string;
   paid_invoice?: string;
   paid_bill?: string;
-  rebill_type?: string;
+  paid_user?: string;
+  rebill_type?: 'cost' | 'markup' | 'price';
+  rebill_factor?: string;
   rebill_to_project?: string;
   transfer_bank_account?: string;
-  paid_user?: string;
+  linked_transfer_explanation?: string;
+  linked_transfer_account?: string;
   foreign_currency_value?: string;
-  attachment?: string;
-  locked: boolean;
+  stock_item?: string;
+  stock_altering_quantity?: number;
+  capital_asset?: string;
+  disposed_asset?: string;
+  property?: string;
+  direct_contact?: string;
+  receipt_reference?: string;
+  ec_status?: 'UK/Non-EC' | 'EC Goods' | 'EC Services' | 'Reverse Charge' | 'EC VAT MOSS';
+  marked_for_review?: boolean;
+  is_locked?: boolean;
+  locked_attributes?: string[];
+  attachment?: FreeAgentAttachment;
+  bank_account?: string;
+  bank_transaction?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface FreeAgentBankTransaction {

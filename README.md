@@ -136,6 +136,14 @@ On first use, the server will provide an authorization URL. Visit this URL to au
 - `split_transaction` - Split across categories
 - `unexplain_transaction` - Remove explanation
 
+### Bank Transaction Explanations
+- `list_bank_transaction_explanations` - List all explanations for a bank account
+- `get_bank_transaction_explanation` - Get explanation details including attachment info
+- `create_bank_transaction_explanation` - Create explanation (payment, invoice receipt, bill payment, transfer, etc.)
+- `update_bank_transaction_explanation` - Update existing explanation
+- `delete_bank_transaction_explanation` - Delete explanation
+- `upload_receipt` - Upload receipt/attachment (PNG, JPEG, GIF, PDF, max 5MB)
+
 ### Bills
 - `create_bill` - Record supplier bill
 - `update_bill` - Modify bill

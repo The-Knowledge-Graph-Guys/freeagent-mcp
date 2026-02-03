@@ -112,3 +112,27 @@ export type {
   TransactionSearchResult,
   UnexplainedTransactionsResult,
 } from './query-tools.js';
+
+// Bank transaction explanation tools
+export {
+  listBankTransactionExplanations,
+  getBankTransactionExplanation,
+  updateBankTransactionExplanation,
+  deleteBankTransactionExplanation,
+  uploadReceipt,
+  createBankTransactionExplanation,
+  listBankTransactionExplanationsSchema,
+  getBankTransactionExplanationSchema,
+  updateBankTransactionExplanationSchema,
+  deleteBankTransactionExplanationSchema,
+  uploadReceiptSchema,
+  createBankTransactionExplanationSchema,
+} from './explanation-tools.js';
+export type {
+  ListBankTransactionExplanationsInput,
+  GetBankTransactionExplanationInput,
+  UpdateBankTransactionExplanationInput,
+  DeleteBankTransactionExplanationInput,
+  UploadReceiptInput,
+  CreateBankTransactionExplanationInput,
+} from './explanation-tools.js';
