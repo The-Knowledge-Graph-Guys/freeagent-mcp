@@ -113,6 +113,24 @@ export type {
   UnexplainedTransactionsResult,
 } from './query-tools.js';
 
+// Accounting/Financial reporting tools
+export {
+  getTrialBalanceSummary,
+  getTaxTimeline,
+  getCashFlow,
+  getTrialBalanceSummarySchema,
+  getTaxTimelineSchema,
+  getCashFlowSchema,
+} from './accounting-tools.js';
+export type {
+  GetTrialBalanceSummaryInput,
+  GetTaxTimelineInput,
+  GetCashFlowInput,
+  ProfitAndLossReport,
+  TaxTimelineReport,
+  CashFlowReport,
+} from './accounting-tools.js';
+
 // Bank transaction explanation tools
 export {
   listBankTransactionExplanations,

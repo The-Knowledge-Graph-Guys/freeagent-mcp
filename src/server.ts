@@ -33,6 +33,8 @@ import * as prompts from './prompts/index.js';
 
 export interface FreeAgentMcpServer {
   server: Server;
+  tokenStore: ReturnType<typeof createTokenStore>;
+  tokenManager: TokenManager;
   getAuthorizationUrl: (state?: string) => string;
   handleAuthorizationCode: (code: string) => Promise<void>;
   isAuthenticated: () => boolean;
@@ -520,6 +522,22 @@ export function createFreeAgentMcpServer(): FreeAgentMcpServer {
         description: 'Upload a receipt/attachment to a bank transaction explanation (PNG, JPEG, GIF, PDF, max 5MB)',
         inputSchema: zodToJsonSchema(tools.uploadReceiptSchema),
       },
+      // Accounting/Financial reporting tools
+      {
+        name: 'get_profit_and_loss',
+        description: 'Get profit & loss report for a date range (income, cost of sales, overheads, net profit)',
+        inputSchema: zodToJsonSchema(tools.getTrialBalanceSummarySchema),
+      },
+      {
+        name: 'get_tax_timeline',
+        description: 'Get upcoming tax obligations (VAT, corporation tax, PAYE deadlines and amounts)',
+        inputSchema: zodToJsonSchema(tools.getTaxTimelineSchema),
+      },
+      {
+        name: 'get_cash_flow',
+        description: 'Get cash flow summary grouped by month or week (inflows, outflows, net)',
+        inputSchema: zodToJsonSchema(tools.getCashFlowSchema),
+      },
     ],
   }));
 
@@ -709,6 +727,26 @@ export function createFreeAgentMcpServer(): FreeAgentMcpServer {
           );
           break;
 
+        // Accounting/Financial reporting tools
+        case 'get_profit_and_loss':
+          result = await tools.getTrialBalanceSummary(
+            client,
+            args as tools.GetTrialBalanceSummaryInput
+          );
+          break;
+        case 'get_tax_timeline':
+          result = await tools.getTaxTimeline(
+            client,
+            args as tools.GetTaxTimelineInput
+          );
+          break;
+        case 'get_cash_flow':
+          result = await tools.getCashFlow(
+            client,
+            args as tools.GetCashFlowInput
+          );
+          break;
+
         default:
           throw new McpError(ErrorCode.MethodNotFound, `Unknown tool: ${name}`);
       }
@@ -789,6 +827,8 @@ export function createFreeAgentMcpServer(): FreeAgentMcpServer {
 
   return {
     server,
+    tokenStore,
+    tokenManager,
     getAuthorizationUrl: (state?: string) => generateAuthorizationUrl(state),
     handleAuthorizationCode: async (code: string) => {
       const tokens = await exchangeCodeForTokens(code);

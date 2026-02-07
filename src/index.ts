@@ -2,16 +2,14 @@
 
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { createFreeAgentMcpServer } from './server.js';
-import { createTokenStore } from './auth/token-store.js';
 import { config } from './config.js';
 
 async function main() {
-  // Create server
-  const { server, getAuthorizationUrl, handleAuthorizationCode, isAuthenticated } =
+  // Create server — use its internal tokenStore (not a separate one)
+  const { server, tokenStore, getAuthorizationUrl, handleAuthorizationCode, isAuthenticated } =
     createFreeAgentMcpServer();
 
-  // Load persisted tokens if available
-  const tokenStore = createTokenStore(config.tokenEncryptionKey);
+  // Load persisted tokens into the server's own tokenStore
   await tokenStore.load();
 
   // Log startup info
