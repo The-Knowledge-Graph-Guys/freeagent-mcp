@@ -94,20 +94,24 @@ export type {
 // Query tools
 export {
   listUnpaidInvoices,
+  listUnpaidBills,
   getBankSummary,
   searchTransactions,
   getUnexplainedTransactions,
   listUnpaidInvoicesSchema,
+  listUnpaidBillsSchema,
   getBankSummarySchema,
   searchTransactionsSchema,
   getUnexplainedTransactionsSchema,
 } from './query-tools.js';
 export type {
   ListUnpaidInvoicesInput,
+  ListUnpaidBillsInput,
   GetBankSummaryInput,
   SearchTransactionsInput,
   GetUnexplainedTransactionsInput,
   UnpaidInvoicesSummary,
+  UnpaidBillsSummary,
   BankSummary,
   TransactionSearchResult,
   UnexplainedTransactionsResult,

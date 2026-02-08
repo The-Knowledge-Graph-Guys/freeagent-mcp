@@ -477,6 +477,11 @@ export function createFreeAgentMcpServer(): FreeAgentMcpServer {
         inputSchema: zodToJsonSchema(tools.listUnpaidInvoicesSchema),
       },
       {
+        name: 'list_unpaid_bills',
+        description: 'Get summary of unpaid/overdue bills payable',
+        inputSchema: zodToJsonSchema(tools.listUnpaidBillsSchema),
+      },
+      {
         name: 'get_bank_summary',
         description: 'Get aggregate bank account balances',
         inputSchema: zodToJsonSchema(tools.getBankSummarySchema),
@@ -670,6 +675,13 @@ export function createFreeAgentMcpServer(): FreeAgentMcpServer {
           result = await tools.listUnpaidInvoices(
             client,
             args as tools.ListUnpaidInvoicesInput,
+            await getContactNameLookup()
+          );
+          break;
+        case 'list_unpaid_bills':
+          result = await tools.listUnpaidBills(
+            client,
+            args as tools.ListUnpaidBillsInput,
             await getContactNameLookup()
           );
           break;
