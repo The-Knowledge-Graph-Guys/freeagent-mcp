@@ -11,6 +11,10 @@ import type {
 import { extractId, parseNumericString } from './common.js';
 
 export function transformBankAccount(account: FreeAgentBankAccount): LLMBankAccount {
+  // FreeAgent API returns lowercase status ('active', 'hidden') for bank accounts
+  // but capitalized for contacts. Normalize to capitalized for consistent LLM types.
+  const normalizedStatus = account.status.charAt(0).toUpperCase() + account.status.slice(1) as LLMBankAccount['status'];
+
   return {
     id: extractId(account.url),
     name: account.name,
@@ -18,7 +22,7 @@ export function transformBankAccount(account: FreeAgentBankAccount): LLMBankAcco
     currency: account.currency,
     currentBalance: parseNumericString(account.current_balance),
     openingBalance: parseNumericString(account.opening_balance),
-    status: account.status,
+    status: normalizedStatus,
     isPrimary: account.is_primary,
     latestActivityDate: account.latest_activity_date,
   };

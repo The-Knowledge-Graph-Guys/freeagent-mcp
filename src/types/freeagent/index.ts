@@ -76,7 +76,7 @@ export interface FreeAgentInvoice {
   comments?: string;
   payment_terms_in_days: number;
   ec_status?: string;
-  invoice_items: FreeAgentInvoiceItem[];
+  invoice_items?: FreeAgentInvoiceItem[];
   created_at: string;
   updated_at: string;
   paid_on?: string;
@@ -122,7 +122,7 @@ export interface FreeAgentBankAccount {
   currency: string;
   current_balance: string;
   latest_activity_date?: string;
-  status: 'Active' | 'Hidden';
+  status: string; // FreeAgent returns lowercase ('active', 'hidden') — normalized in transformer
   is_personal: boolean;
   is_primary: boolean;
   bank_name?: string;

@@ -36,7 +36,7 @@ export function transformInvoice(
     dueValue: parseNumericString(invoice.due_value),
     status: invoice.status as LLMInvoice['status'],
     daysOverdue: computeDaysOverdue(invoice.due_on, invoice.status),
-    items: invoice.invoice_items.map(transformInvoiceItem),
+    items: (invoice.invoice_items ?? []).map(transformInvoiceItem),
     comments: invoice.comments,
     paymentTermsDays: invoice.payment_terms_in_days,
   };

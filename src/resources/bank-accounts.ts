@@ -13,7 +13,9 @@ export async function getBankAccounts(
 ) {
   try {
     const params: Record<string, string> = {};
-    if (filters.view) params['view'] = filters.view;
+    // FreeAgent API only accepts specific view filters (standard, paypal_accounts, credit_card_accounts).
+    // 'all' is not a valid API value — omit the param to get all accounts.
+    if (filters.view && filters.view !== 'all') params['view'] = filters.view;
 
     const accounts = await client.fetchAllPages<FreeAgentBankAccount>(
       '/bank_accounts',
